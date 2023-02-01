@@ -13,4 +13,4 @@ payload:
   - '+.hoho.tv'
   - '+.ondemandchina.com'
   - '+.tangrenjie.tv'
-
+  - '+.qfitv.com'
