@@ -12,3 +12,5 @@ payload:
   - '+.nycvod.com'
   - '+.hoho.tv'
   - '+.ondemandchina.com'
+  - '+.tangrenjie.tv'
+
