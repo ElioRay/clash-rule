@@ -15,4 +15,4 @@ payload:
   - '+.tangrenjie.tv'
   - '+.qfitv.com'
   - '+.pupvod.com'
-  - '+.gitbook.com'
+  - '+.gitbook.io'
