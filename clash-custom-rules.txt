@@ -16,3 +16,4 @@ payload:
   - '+.qfitv.com'
   - '+.pupvod.com'
   - '+.gitbook.io'
+  - '+.histar.tv'
