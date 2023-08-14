@@ -1,4 +1,4 @@
 payload:
-  '+.ulivetv.net'
-  '+.histar.tv'
-  '+.cloudfront.net'
+  - '+.ulivetv.net'
+  - '+.histar.tv'
+  - '+.cloudfront.net'
