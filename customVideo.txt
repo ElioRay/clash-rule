@@ -2,7 +2,7 @@ payload:
   - '+.ulivetv.net'
   - '+.histar.tv'
   - '+.cloudfront.net'
-  - 'cdn2.ceres9350.com'
+  - '+.cdn2.ceres9350.com'
   - '+.69mj'
   - '+.cdn2'
   - '+.pangzitv'
