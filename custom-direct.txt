@@ -1,1 +1,3 @@
-
+payload:
+  - '+.hundsun.com'
+  - '+.gamer520.com'
