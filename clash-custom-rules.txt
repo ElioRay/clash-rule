@@ -17,3 +17,5 @@ payload:
   - '+.pupvod.com'
   - '+.gitbook.io'
   - '+.histar.tv'
+  - '+.missav.com'
+  - '+.jable.tv'
