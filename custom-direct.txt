@@ -1,3 +1,3 @@
 payload:
-  - '+.hundsun.com'
-  - '+.gamer520.com'
+  - DOMAIN-SUFFIX,hundsun.com
+  - DOMAIN-SUFFIX,gamer520.com
