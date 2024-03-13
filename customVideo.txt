@@ -31,3 +31,4 @@ payload:
   - DOMAIN-SUFFIX,www.kanvipdy
   - DOMAIN-SUFFIX,filmcaf.com
   - DOMAIN-SUFFIX,kanb.tv
+  - DOMAIN-KEYWORD,mcoun
