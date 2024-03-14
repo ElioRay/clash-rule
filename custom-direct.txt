@@ -1,3 +1,0 @@
-payload:
-  - DOMAIN-SUFFIX,hundsun.com
-  - DOMAIN-SUFFIX,gamer520.com
