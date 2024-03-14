@@ -1,4 +1,5 @@
 payload:
+  - DOMAIN-KEYWORD,douban
   - DOMAIN-SUFFIX,hundsun.com
   - DOMAIN-KEYWORD,ding
   - DOMAIN-SUFFIX,gamer520.com
