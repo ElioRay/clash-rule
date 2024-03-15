@@ -1,4 +1,11 @@
 payload:
+  - DOMAIN-KEYWORD,bilibili
+  - DOMAIN-KEYWORD,hnagroup
+  - DOMAIN-KEYWORD,stripe
+  - DOMAIN-KEYWORD,weibo
+  - DOMAIN-KEYWORD,qiyi
+  - DOMAIN-KEYWORD,douban
+  - DOMAIN-KEYWORD,csdn
   - DOMAIN-KEYWORD,douban
   - DOMAIN-SUFFIX,hundsun.com
   - DOMAIN-KEYWORD,ding

@@ -1,4 +1,10 @@
 payload:
+  - DOMAIN-KEYWORD,arc
+  - DOMAIN-KEYWORD,liangyuandian
+  - DOMAIN-KEYWORD,liangyuandian
+  - DOMAIN-KEYWORD,cococloud
+  - DOMAIN-SUFFIX,hahaha.alal.cc
+  - DOMAIN-SUFFIX,ab.dabai.in
   - DOMAIN-SUFFIX,a1.mzstatic.com
   - DOMAIN-SUFFIX,chongtmtv.com
   - DOMAIN-SUFFIX,raw.githubusercontent.com
