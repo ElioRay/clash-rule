@@ -1,5 +1,6 @@
 payload:
   - DOMAIN-KEYWORD,bilibili
+  - DOMAIN-KEYWORD,qq
   - DOMAIN-KEYWORD,hnagroup
   - DOMAIN-KEYWORD,stripe
   - DOMAIN-KEYWORD,weibo
