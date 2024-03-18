@@ -1,4 +1,5 @@
 payload:
+  - DOMAIN-KEYWORD,metacubex
   - DOMAIN-KEYWORD,arc
   - DOMAIN-KEYWORD,liangyuandian
   - DOMAIN-KEYWORD,liangyuandian

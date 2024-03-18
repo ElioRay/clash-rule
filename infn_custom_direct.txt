@@ -1,5 +1,7 @@
 payload:
   - DOMAIN-KEYWORD,bilibili
+  - DOMAIN-KEYWORD,mi
+  - DOMAIN-KEYWORD,csdn
   - DOMAIN-KEYWORD,qq
   - DOMAIN-KEYWORD,hnagroup
   - DOMAIN-KEYWORD,stripe
@@ -59,7 +61,7 @@ payload:
   - DOMAIN-KEYWORD,beplay
   - DOMAIN-KEYWORD,officecdn
   - DOMAIN-KEYWORD,taobao
-  - DOMAIN-KEYWORD,bilibili
+  - DOMAIN-KEYWORD,bilibilibilibili
   - DOMAIN-KEYWORD,hnagroup
   - DOMAIN-KEYWORD,stripe
   - DOMAIN-KEYWORD,weibo
