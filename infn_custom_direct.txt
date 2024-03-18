@@ -1,4 +1,7 @@
 payload:
+  - DOMAIN-KEYWORD,wechat
+  - DOMAIN-KEYWORD,weixin
+  - DOMAIN-KEYWORD,tencent
   - DOMAIN-KEYWORD,bilibili
   - DOMAIN-KEYWORD,mi
   - DOMAIN-KEYWORD,csdn
