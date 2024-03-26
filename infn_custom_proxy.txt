@@ -1,62 +1,222 @@
-payload:
-  - DOMAIN-KEYWORD,metacubex
-  - DOMAIN-KEYWORD,arc
-  - DOMAIN-KEYWORD,liangyuandian
-  - DOMAIN-KEYWORD,liangyuandian
-  - DOMAIN-KEYWORD,cococloud
-  - DOMAIN-SUFFIX,hahaha.alal.cc
-  - DOMAIN-SUFFIX,ab.dabai.in
-  - DOMAIN-SUFFIX,a1.mzstatic.com
-  - DOMAIN-SUFFIX,chongtmtv.com
-  - DOMAIN-SUFFIX,raw.githubusercontent.com
-  - DOMAIN-SUFFIX,translate.googleapis.com
-  - DOMAIN-SUFFIX,sublimetext.com
-  - DOMAIN-SUFFIX,sub.bkcloud.ml
-  - DOMAIN-SUFFIX,olevod.io
-  - DOMAIN-SUFFIX,jinmantv.com
-  - DOMAIN-SUFFIX,nivod.tv
-  - DOMAIN-SUFFIX,paka.tv
-  - DOMAIN-SUFFIX,nycvod.com
-  - DOMAIN-SUFFIX,hoho.tv
-  - DOMAIN-SUFFIX,ondemandchina.com
-  - DOMAIN-SUFFIX,tangrenjie.tv
-  - DOMAIN-SUFFIX,qfitv.com
-  - DOMAIN-SUFFIX,pupvod.com
-  - DOMAIN-SUFFIX,gitbook.io
-  - DOMAIN-SUFFIX,histar.tv
-  - DOMAIN-SUFFIX,missav.com
-  - DOMAIN-SUFFIX,jable.tv
-  - DOMAIN-SUFFIX,ulivetv.net
-  - DOMAIN-SUFFIX,histar.tv
-  - DOMAIN-SUFFIX,cloudfront.net
-  - DOMAIN-SUFFIX,cdn2.ceres9350.com
-  - DOMAIN-SUFFIX,69mj
-  - DOMAIN-SUFFIX,cdn2
-  - DOMAIN-SUFFIX,pangzitv
-  - DOMAIN-SUFFIX,uvod
-  - DOMAIN-SUFFIX,olevod
-  - DOMAIN-SUFFIX,feitu
-  - DOMAIN-SUFFIX,tangrenjie
-  - DOMAIN-SUFFIX,ondemandchina
-  - DOMAIN-SUFFIX,hoho
-  - DOMAIN-SUFFIX,nivod4.tv
-  - DOMAIN-SUFFIX,qfitv.com
-  - DOMAIN-SUFFIX,nycvod.com
-  - DOMAIN-SUFFIX,jinmantv.com
-  - DOMAIN-SUFFIX,7xi.tv
-  - DOMAIN-SUFFIX,huale
-  - DOMAIN-SUFFIX,paka
-  - DOMAIN-SUFFIX,pupvod.com
-  - DOMAIN-SUFFIX,new.iyf
-  - DOMAIN-SUFFIX,chongtmtv.com
-  - DOMAIN-SUFFIX,keyiys.com
-  - DOMAIN-SUFFIX,m1.nivod
-  - DOMAIN-SUFFIX,www.ziziys
-  - DOMAIN-SUFFIX,lovedan.net
-  - DOMAIN-SUFFIX,ddmf.net
-  - DOMAIN-SUFFIX,globe.hx2048
-  - DOMAIN-SUFFIX,www.kanvipdy
-  - DOMAIN-SUFFIX,filmcaf.com
-  - DOMAIN-SUFFIX,kanb.tv
-  - DOMAIN-KEYWORD,mcoun
+port: 7890                  # HTTP 代理端口
+socks-port: 7891            # Socks 端口
+mixed-port: 7893            # 混合端口
+allow-lan: true             # 允许局域网连接
+bind-address: "*"           # 地址绑定
+mode: rule                 # 规则模式
+log-level: info             # 日志级别
+# clash verger不支持redir模式
+# redir-port: 7892            # Redir 端口
+# external-controller: 127.0.0.1:9090
+p0:  &p0   {use: [coc,lia,dab,pdd]}
+# 正常代理
+s0:  &s0   { proxies: [扣扣机场, 两元机场, 大白机场, 地区选择]}
+# 通用代理
+s4:  &s4   { proxies: [全球加速, 直接连接, 扣扣机场, 两元机场, 大白机场, 地区选择]}
+# 手动自动
+s5:  &s5   { proxies: [扣扣自选, 扣肉自选, 花儿自选]}
+# 地区节点
+s3:  &s3   { proxies: [日本节点, 美国节点, 台湾节点, 狮城节点, 香港节点, 韩国节点]}
+t1:  &t1   { proxies: [DIRECT]}
+t2:  &t2   { proxies: [REJECT]}
+# 手动选择
+m1:  &m1  { type: select}
+# http://cp.cloudflare.com/generate_204
+# https://www.gstatic.com/generate_204
+a1:  &a1  { type: url-test, lazy: true, url: 'http://cp.cloudflare.com/generate_204', interval: 300, tolerance: 150, hidden: true }
+a2:  &a2  { type: load-balance, hidden: true}
+a3:  &a3  { type: fallback, lazy: true, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}, hidden: true}
 
+f1:  &f1  { filter: "港|HK|(?i)Hong|日本|东京|JP|(?i)Japan|台湾|TW|(?i)Taiwan|美|US|(?i)States|American|新加坡|SG|(?i)Singapore" }
+f2:  &f2  { filter: ".+倍" }
+f3:  &f3  { filter: "流媒体" }
+f4:  &f4  { filter: "港|HK|(?i)Hong" }
+f5:  &f5  { filter: "日|东京|J, P|(?i)Japan" }
+f6:  &f6  { filter: "台|湾|TW|(?i)Taiwan" }
+f7:  &f7  { filter: "美|US|(?i)States|American" }
+f8:  &f8  { filter: "新|坡|SG|(?i)Singapore" }
+f9:  &f9  { filter: "韩|(?i)Korea" }
+
+i1:  &i1  { type: select, filter: '到期|剩余|官网'}
+
+r2:  &r2  { type: http, behavior: classical, interval: 86400}
+r3:  &r3  { type: http, behavior: classical, interval: 86400}
+r4:  &r4  { type: http, behavior: ipcidr, interval: 86400}
+
+pv1: &pv1 { type: http, interval: 86400, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 1800}}
+
+
+proxy-providers:
+  lia: 
+    <<: *pv1
+    url: https://liangyuandian.cc/api/v1/client/subscribe?token=ad26da51fa883d3aba6414d11c28501c
+    path: ./proxy_providers/lia1.yaml
+    tag: "两元"
+  coc:
+    # 
+    <<: *pv1
+    url: https://cococloud.online/api/v1/client/subscribe?token=3189e650c54b752a948a005cc1152299&types=hysteria2
+    path: ./proxy_providers/coc.yaml
+  dab: 
+    # https://ab.dabai.in
+    <<: *pv1
+    url: https://ab.dabai.in/link/eckGXL0z47Oo1rVZ?clash=1
+    path: ./proxy_providers/dab.yaml
+  pdd:  
+    # https://ab.dabai.in
+    <<: *pv1
+    url: https://www.pdda.me/api/v1/client/subscribe?token=0960d27ac200910f2d5288d40df47315
+    path: ./proxy_providers/pdd.yaml
+  # hua: 
+  #   <<: *pv1
+  #   url: https://hahaha.alal.cc/api/v1/client/subscribe?token=3cb642056fdf241e31a2b14f7a1694c0
+  #   path: ./proxy_providers/hua.yaml
+  # cor: 
+  #   # www.cornss.com
+  #   <<: *pv1
+  #   url: https://www.cornss.com/api/v1/client/subscribe?token=1516db89fc6455af389a283d12fcf698
+  #   path: ./proxy_providers/cor.yaml
+  #   override:
+  #     additional-prefix: "cor |"
+proxies: null
+proxy-groups:
+  # 分流分组 Color <-> Dark颜色切换
+  - { name: 兜底分流, <<: [*s4, *m1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Final.png'            }
+  - { name: 全球加速, <<: [*s0, *m1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png'           }
+  # 分流规则
+  - { name: 人工智能_OpenAI, <<: [*s4, *m1],   icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Bot.png'              }
+  - { name: 抖音国际, <<: [*s4, *m1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/TikTok.png'           }
+  - { name: 谷歌服务, <<: [*s4, *m1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Google_Search.png'    }
+  - { name: 电报消息, <<: [*s4, *m1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Telegram_X.png'       }
+  - { name: 微软服务, <<: [*s4, *m1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/OneDrive.png'         }
+  - { name: 苹果服务, <<: [*s4, *m1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/App_Store.png'        }
+  - { name: 哔哩哔哩, <<: [*s4, *m1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/bilibili.png'        }
+  # 自动选择
+  - { name: 延迟最佳_两元,   <<: *a1, use: [lia],  icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png'             }
+  - { name: 断流切换_两元,   <<: *a3, use: [lia],  icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png'             }
+  - { name: 两元机场,        <<: *m1, use: [lia], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png', proxies: [延迟最佳_两元,断流切换_两元]}
+  - { name: 延迟最佳_扣扣,   <<: *a1, use: [coc],  icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png'             }
+  - { name: 断流切换_扣扣,   <<: *a3, use: [coc],  icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png'             }
+  - { name: 扣扣机场,        <<: *m1, use: [coc], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png', proxies: [延迟最佳_扣扣,断流切换_扣扣]}
+  # 大白
+  - { name: 延迟最佳_大白,   <<: *a1, use: [dab],  icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png'             }
+  - { name: 断流切换_大白,   <<: *a3, use: [dab],  icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png'             }
+  - { name: 大白机场,        <<: *m1, use: [dab], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png', proxies: [延迟最佳_大白,断流切换_大白]}
+  # 拼多多
+  - { name: 延迟最佳_拼多,   <<: *a1, use: [pdd],  icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png'             }
+  - { name: 断流切换_拼多,   <<: *a3, use: [pdd],  icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png'             }
+  - { name: 拼多机场,        <<: *m1, use: [pdd], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png', proxies: [延迟最佳_大白,断流切换_大白]}
+  # - { name: 延迟最佳_扣肉,   <<: *a1, use: [cor],  icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png'             }
+  # - { name: 断流切换_扣肉,   <<: *a3, use: [cor],  icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png'             }
+  # - { name: 机场_Cor,       <<: *m1, use: [cor], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png', pproxies: [延迟最佳_扣肉,断流切换_扣肉]}
+  # - { name: 延迟最佳_花儿,   <<: *a1, use: [hua],  icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png'             }
+  # - { name: 断流切换_花儿,   <<: *a3, use: [hua],  icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png'             }
+  # - { name: 花儿机场,        <<: *m1, use: [hua], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png', proxies: [延迟最佳_花儿,断流切换_花儿]}
+  # 地区节点
+  - { name: 地区选择, <<: [*s3, *m1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Find_My.png'          }
+  - { name: 香港节点, <<: [*p0, *a1, *f4],     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Domestic.png'         }
+  - { name: 日本节点, <<: [*p0, *a1, *f5],     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Domestic.png'         }             
+  - { name: 台湾节点, <<: [*p0, *a1, *f6],     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Domestic.png'         }
+  - { name: 美国节点, <<: [*p0, *a1, *f7],     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Domestic.png'         }
+  - { name: 狮城节点, <<: [*p0, *a1, *f8],     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Domestic.png'         }
+  - { name: 韩国节点, <<: [*p0, *a1, *f9],     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Domestic.png'         }
+  # 手动选择
+  # - { name: 手动选择, <<: [*s5, *m1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Airport.png'          }
+  # - { name: 扣扣自选, <<: *m1, use: [coc],     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Available.png'             }
+  # - { name: 扣肉自选, <<: *m1, use: [cor],     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Available.png'             }
+  # - { name: 花儿自选, <<: *m1, use: [hua],     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Available.png'             }
+  # 特殊模式
+  - { name: 广告屏蔽, <<: [*t1, *a1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/AdBlack.png', hidden: true   }
+  - { name: 直接连接, <<: [*t1, *a1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/China.png',   hidden: true   }
+  - { name: 拒绝链接, <<: [*t2, *a1],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/China.png',   hidden: true   }
+  - { name: 故障切换, <<: [*p0, *a3],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Spark.png'            }
+  - { name: 负载均衡, <<: [*p0, *a2],          icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Round_Robin.png'      }
+# icon url1: https://fastly.jsdelivr.net/gh/namelessup/Koolson-Qure@master/IconSet/Color/
+# icon url2: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color
+# 分流规则 
+rule-providers:
+  Direct:       { <<: *r3, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml',                     path: ./ruleset/Direct.yaml           }
+  Lan:          { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml',                           path: ./ruleset/Lan.yaml              }
+  Download:     { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml',                 path: ./ruleset/Download.yaml         }
+  OpenAi:       { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml',                     path: ./ruleset/OpenAi.yaml           }
+  BiliBili:     { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BiliBili/BiliBili.yaml',                 path: ./ruleset/BiliBili.yaml         }
+  GlobalMedia:  { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml', path: ./ruleset/GlobalMedia.yaml      }
+  Apple:        { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple_Classical.yaml',             path: ./ruleset/Apple.yaml            }
+  Github:       { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml',                     path: ./ruleset/Github.yaml           }
+  Microsoft:    { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml',               path: ./ruleset/Microsoft.yaml        }
+  Google:       { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml',                     path: ./ruleset/Google.yaml           }
+  Telegram:     { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml',                 path: ./ruleset/Telegram.yaml         }
+  Twitter:      { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml',                   path: ./ruleset/Twitter.yaml          }
+  Game:         { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Game/Game.yaml',                         path: ./ruleset/Game.yaml             }
+  ProxyLite:    { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ProxyLite/ProxyLite.yaml',               path: ./ruleset/ProxyLite.yaml        }
+  tiktok:       { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml',                     path: ./ruleset/TikTok.yaml           }
+  customDirect: { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/ElioRay/elioray-clash-rules@master/infn_custom_direct.txt',                             path: ./ruleset/cust-direct.txt       }
+  customProxy : { <<: *r2, url: 'https://fastly.jsdelivr.net/gh/ElioRay/elioray-clash-rules@master/infn_custom_proxy.txt',                              path: ./ruleset/cust-proxy.txt        }
+  # 分流Policy 
+rules: 
+  - DOMAIN-KEYWORD,liangyuandian,全球加速,no-resolve
+  - DOMAIN-KEYWORD,cococloud,全球加速,no-resolve
+  - DOMAIN-KEYWORD,wechat,全球加速,no-resolve
+  - DOMAIN-KEYWORD,weixin,全球加速,no-resolve
+  - DOMAIN-KEYWORD,tencent,全球加速,no-resolve
+  - DOMAIN-KEYWORD,gemini,谷歌服务,no-resolve
+  - DOMAIN-SUFFIX,hahaha.alal.cc,全球加速,no-resolve
+  - DOMAIN-SUFFIX,ab.dabai.in,全球加速,no-resolve
+  - RULE-SET,customProxy,全球加速,no-resolve
+  - RULE-SET,customDirect,DIRECT,no-resolve
+  - RULE-SET,Google,谷歌服务,no-resolve
+  - RULE-SET,OpenAi,人工智能_OpenAI,no-resolve
+  - RULE-SET,tiktok,抖音国际,no-resolve
+  - RULE-SET,Microsoft,微软服务,no-resolve
+  - RULE-SET,Telegram,全球加速,no-resolve
+  - RULE-SET,Twitter,全球加速,no-resolve
+  - RULE-SET,Game,全球加速,,no-resolve
+  - RULE-SET,GlobalMedia,全球加速,no-resolve
+  - RULE-SET,Apple,苹果服务,no-resolve
+  - RULE-SET,Github,全球加速,no-resolve
+  - RULE-SET,ProxyLite,全球加速,no-resolve
+  - RULE-SET,BiliBili,哔哩哔哩,no-resolve,
+  - RULE-SET,Direct,DIRECT,no-resolve
+  - RULE-SET,Download,DIRECT,no-resolve
+  - GEOIP,LAN,DIRECT,no-resolve
+  - GEOIP,CN,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.1/24,DIRECT,no-resolve
+  - MATCH,兜底分流
+# 在TAP | TUN模式下生效
+# dns:
+#   enable: true
+#   ipv6: false              # 关闭 IPV6
+#   listen: 0.0.0.0:53       # dns 监听
+#   nhanced-mode: fake-ip
+#   fake-ip-range: 198.18.0.1/16
+#   fake-ip-filter:
+#     - "*.lan"
+#     - localhost.ptlogin2.qq.com
+#     - +.srv.nintendo.net
+#     - +.stun.playstation.net
+#     - +.msftconnecttest.com
+#     - +.msftncsi.com
+#     - +.xboxlive.com 
+#     - msftconnecttest.com
+#     - xbox.*.microsoft.com
+#     - "*.battlenet.com.cn"
+#     - "*.battlenet.com"
+#     - "*.blzstatic.cn"
+#     - "*.battle.net"
+#   nameserver:              # 默认 DNS 服务
+#     - 10.188.136.1
+#     - 192.168.2.1
+#     - 8.8.8.8
+#     - 223.5.5.5
+#     - 119.29.29.29
+#   fallback:
+#     - 114.114.114.114
+#     - 8.8.8.8
+#     - https://cloudflare-dns.com/dns-query
+#     - https://dns.google/dns-query
+#     - https://dns.alidns.com/dns-queryremote-proxies
+#   fallback-filter:
+#     geoip: true
+#     geoip-code: CN
+#     ipcidr:
+#       - 240.0.0.0/4
