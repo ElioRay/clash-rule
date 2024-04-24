@@ -1,5 +1,7 @@
 payload:
   - DOMAIN-KEYWORD,ghxi
+  - DOMAIN-KEYWORD,hs.net
+  - DOMAIN-SUFFIX,hs.net
   - DOMAIN-KEYWORD,wechat
   - DOMAIN-KEYWORD,weixin
   - DOMAIN-KEYWORD,tencent
