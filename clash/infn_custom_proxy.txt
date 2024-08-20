@@ -1,5 +1,5 @@
 payload:
-  - DOMAIN-KEYWORD,iyf.tv
+  - DOMAIN-KEYWORD,iyf
   - DOMAIN-KEYWORD,metacubex
   - DOMAIN-KEYWORD,arc
   - DOMAIN-KEYWORD,liangyuandian
