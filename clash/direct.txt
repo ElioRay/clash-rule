@@ -1,0 +1,19 @@
+payload:
+  - DOMAIN-KEYWORD,ghxi
+  - DOMAIN-KEYWORD,infn
+  - DOMAIN,clash.razord.top
+  - DOMAIN,yacd.haishan.me
+  - DOMAIN-KEYWORD,hundsun
+  - DOMAIN-KEYWORD,lol
+  - DOMAIN-KEYWORD,beacons5
+  - DOMAIN-KEYWORD,wechat
+  - DOMAIN-KEYWORD,weixin
+  - DOMAIN-KEYWORD,qq
+  - DOMAIN-KEYWORD,tencent
+  - DOMAIN-KEYWORD,weibo
+  - DOMAIN-KEYWORD,meituan
+  - DOMAIN-KEYWORD,alibaba
+  - DOMAIN-KEYWORD,taobao
+  - DOMAIN-KEYWORD,baidu
+  - DOMAIN-SUFFIX,cn
+  - DOMAIN-SUFFIX,edu

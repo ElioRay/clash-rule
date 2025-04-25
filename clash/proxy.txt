@@ -1,0 +1,17 @@
+payload:
+  - DOMAIN-SUFFIX,github.io,代理选择
+  - DOMAIN-KEYWORD,visualstudio,代理选择
+  - DOMAIN-KEYWORD,arc,代理选择
+  - DOMAIN-KEYWORD,github,代理选择
+  - DOMAIN-KEYWORD,liangyuandian,代理选择
+  - DOMAIN-KEYWORD,cococloud,代理选择
+  - DOMAIN-SUFFIX,hahaha.alal.cc,代理选择
+  - DOMAIN-SUFFIX,ab.dabai.in,代理选择
+  - DOMAIN-SUFFIX,a1.mzstatic.com,代理选择
+  - DOMAIN-SUFFIX,chongtmtv.com,代理选择
+  - DOMAIN-SUFFIX,raw.githubusercontent.com,代理选择
+  - DOMAIN-SUFFIX,translate.googleapis.com,代理选择
+  - DOMAIN-SUFFIX,google.com,代理选择
+  - DOMAIN-SUFFIX,sublimetext.com,代理选择
+  - DOMAIN-SUFFIX,sub.bkcloud.ml,代理选择
+  - DOMAIN-SUFFIX,filmcaf.com,代理选择
