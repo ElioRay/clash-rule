@@ -15,4 +15,5 @@ payload:
   - DOMAIN-SUFFIX,sublimetext.com
   - DOMAIN-SUFFIX,sub.bkcloud.ml
   - DOMAIN-SUFFIX,filmcaf.com
+  - DOMAIN-SUFFIX,qichiyu.com
   - DOMAIN-KEYWORD,googleapis
